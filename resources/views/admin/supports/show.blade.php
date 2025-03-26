@@ -6,5 +6,9 @@
     <li>Status: {{ $support->status }}</li>
     <li>Descrição: {{ $support->body }}</li>
 
-
+<form action="{{ route('supports.detroy', $support->id) }}" method="post">
+    @csrf()
+    @method('DELETE')
+    <button type="submit">Excluir</button>
+</form>
 </ul>
