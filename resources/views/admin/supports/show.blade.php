@@ -6,9 +6,9 @@
     <li>Status: {{ $support->status }}</li>
     <li>Descrição: {{ $support->body }}</li>
 
-<form action="{{ route('supports.detroy', $support->id) }}" method="post">
-    @csrf()
-    @method('DELETE')
+<form action="{{ route('supports.detroy', $support->id) }}" method="post"> <!-- tem que ser em um form pois é um submit  -->
+    @csrf() <!-- valida o token unico da request -->
+    @method('DELETE') <!-- troca o method padrao POST por DELETE-->
     <button type="submit">Excluir</button>
 </form>
 </ul>
