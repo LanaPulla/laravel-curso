@@ -6,41 +6,42 @@ e Categorias de Dúvidas, enviar email etc
 */
 
 namespace App\Services;
-
+use App\DTO\CreateSupportDTO;
+use App\DTO\UpdateSupportDTO;
 use stdClass;
 
-class SupportService{
+class SupportService{ //classe que vai levar os dados da repository para as outras class por meio de funcoes
 
-    protected $repository;
+    protected $repository; //para guardar a repository
 
-    public function __construct(){
+    public function __construct(){ //construtor
         
     }
 
 
-    public function getAll(string $filter = null): array { //: array = para retornar somente array
+    public function getAll(string $filter = null): array { //: array = para retornar somente array. 
 
-        return $this->repository->getAll($filter);
+        return $this->repository->getAll($filter); //Metodo para retornar todos os dados do bd
     }
 
 
     public function findOne(string $id): stdClass|null { //stdClass = retorna algo sem propriedades ou métodos definidos
-        return $this->repository->findOne($id);
+        return $this->repository->findOne($id); //metodo para achar somente uma coisa pelo id
     }
 
 
-    public function new(string $subject, string $status, string $body): stdClass{
-       return $this->repository->new($subject, $status, $body);
-    }
+    public function new(CreateSupportDTO $dto): stdClass{
+       return $this->repository->new($dto);//funcao para criar uma nova solicitaçao
+    } 
  
 
-    public function update(string $id, string $subject, string $status, string $body): stdClass|null{
-        return $this->repository->update($id, $subject, $status, $body);
+    public function update(UpdateSupportDTO $dto): stdClass|null{
+        return $this->repository->update($dto); //funcao para atualizar os dados de algo 
     }
     
 
     public function delete(string $id): void{
-        $this->repository->delete($id);
+        $this->repository->delete($id); //funcao para deletar 
     }
 
 }
