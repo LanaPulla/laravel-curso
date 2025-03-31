@@ -1,0 +1,71 @@
+<?php
+
+use App\DTO\CreateSupportDTO;
+use App\DTO\UpdateSupportDTO;
+use App\Models\Support;
+use App\Repositories\SupportRepositoryInterface;
+
+class SupportEloquentORM implements SupportRepositoryInterface{
+
+
+    public function __construct(protected Support $model){
+        
+    }
+
+
+    public function getAll(string $filter = null): array{
+        return $this->model
+                    ->where(function ($query) use ($filter){ //funcao de callback para procurar e pegar todos por meio do filtro 
+                        if($filter){
+                           $query->where('subject', $filter);//aqui para procurar o subject igual
+                           $query->orWhere('body', 'like', "%{$filter}%"); //% e { pra procurar a palavra tanto no inicio quanto no final 
+                        }
+                    })
+                    ->all() 
+                    ->toArray(); // retornando um array
+    }
+
+
+
+
+    public function findOne(string $id): stdClass|null{
+
+        $support = $this->model->find($id);//achar pelo id com a var $support de outra class 
+        if(!$support){
+            return null;//se nao achar é null 
+        }
+        return (object)$support->toArray();//se achar transforma o array em objeto stdClass
+    }
+
+
+
+    public function delete(string $id): void{
+        $this->model->findOrFail($id)->delete(); //findOrFail vai tentar achar pelo id, se nao achar da um exception
+    }
+
+
+
+
+    public function new(CreateSupportDTO $dto): stdClass{
+
+        $support = $this->model->create((array) $dto);
+
+        return (object) $support->toArray(); //se achar transforma o $dto em objeto array stdClass e cria outro 
+
+    }
+
+
+
+
+    public function update(UpdateSupportDTO $dto): stdClass|null{
+       if(!$support = $this->model->find($dto->id)){
+            return null;
+       }
+
+       $support->update((array) $dto);
+
+       return (object) $support->toArray();
+    }
+
+
+}

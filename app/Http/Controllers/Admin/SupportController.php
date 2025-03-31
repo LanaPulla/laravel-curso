@@ -23,6 +23,8 @@ class SupportController extends Controller
 
         $supports =  $this->service->getAll($request->filter);//aqui eu tenho um array de dados vindo da service QUE BUSCA OS DADOS
 
+        dd($supports);
+        
         return view('admin/supports/index', compact('supports', )); //retornar a pag quando o metodo for chamado e retorna o support com os dados da tabela
         //compac criou um array com o mesmo valor da var supports e retornou ele 
     }
