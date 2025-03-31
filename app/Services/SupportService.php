@@ -6,12 +6,13 @@ e Categorias de Dúvidas, enviar email etc
 */
 
 namespace App\Services;
+
 use App\DTO\CreateSupportDTO;
 use App\DTO\UpdateSupportDTO;
 use App\Repositories\SupportRepositoryInterface;
 use stdClass;
 
-class SupportService{ //classe que vai levar os dados da repository para as outras class por meio de funcoes
+class SupportService { //classe que vai levar os dados da repository para as outras class por meio de funcoes
 
   
     public function __construct( protected SupportRepositoryInterface $repository){ //construtor
