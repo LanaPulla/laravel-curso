@@ -33,5 +33,5 @@ Route::get('/contato', [SiteController::class, 'contact']); // aqui é para fica
 
 
 Route::get('/', function () {
-    return view('welcome');
+    echo 'teste';
 });

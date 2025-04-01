@@ -18,7 +18,12 @@ class SupportService { //classe que vai levar os dados da repository para as out
     public function __construct( protected SupportRepositoryInterface $repository){ //construtor
     }
 
+    public function paginate(int $page = 1, int $totalPerPage = 15, string $filter = null ) { 
 
+        return $this->repository->paginate(page: $page, totalPerPage: $totalPerPage, filter: $filter) ; 
+    }
+
+    
     public function getAll(string $filter = null): array { //: array = para retornar somente array. 
 
         return $this->repository->getAll($filter); //Metodo para retornar todos os dados do bd

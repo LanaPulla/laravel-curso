@@ -20,13 +20,15 @@ class SupportController extends Controller
 
     public function index(Request $request){ //pega o objeto e coloca dentro da variavel. O request captura os dados que vem uma solicita http geralmente feita por um usuario
 
-        $supports =  $this->service->getAll($request->filter);//aqui eu tenho um array de dados vindo da service QUE BUSCA OS DADOS
-
-        dd($supports);
+        $supports =  $this->service->paginate(
+            page: $request->get('page', 1),
+            totalPerPage: $request->get('per_page', 15),
+            filter: $request->filter,
+        );//aqui eu tenho um array de dados vindo da service QUE BUSCA OS DADOS
 
         return view('admin/supports/index', compact('supports', )); //retornar a pag quando o metodo for chamado e retorna o support com os dados da tabela
         //compac criou um array com o mesmo valor da var supports e retornou ele 
-    }
+    } 
 
 
 
