@@ -13,17 +13,19 @@
     </thead> 
     <tbody>
 
-        @foreach($supports as $support) <!-- para cada em suportes... -->
+        @foreach($supports->items() as $support) <!-- para cada em suportes... -->
             <tr>
-                <td>{{ $support['subject'] }}</td> <!-- ...mostre tal coluna 'subject', 'status' -->
-                <td>{{ $support['status']}}</td>
-                <td>{{ $support['body'] }}</td>
-                <td> <a href= "{{ route('supports.show', $support['id'] ) }}">Ver</a>
-                     <a href=" {{ route('supports.edit', $support['id'] ) }} ">Editar</a>
+                <td>{{ $support->subject }}</td> <!-- ...mostre tal coluna 'subject', 'status' -->
+                <td>{{ getStatusSupport($support->status) }}</td>
+                <td>{{ $support->body }}</td>
+                <td> <a href= "{{ route('supports.show', $support->id ) }}">Ver</a>
+                     <a href=" {{ route('supports.edit', $support->id ) }} ">Editar</a>
                 </td> <!-- indo para a pag support/{id} para mostrar mais do usuario. É necessário passar o id aqui se nao da erro -->
             </tr>
         @endforeach
     </tbody>
 </table>
 
-
+<x-pagination 
+    :paginator="$supports"
+    :appends="$filters"/>

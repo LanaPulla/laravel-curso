@@ -2,8 +2,8 @@
 
 namespace App\Repositories;
 
-use App\DTO\CreateSupportDTO;
-use App\DTO\UpdateSupportDTO;
+use App\DTO\Supports\CreateSupportDTO;
+use App\DTO\Supports\UpdateSupportDTO;
 use App\Models\Support;
 use App\Repositories\SupportRepositoryInterface;
 use Illuminate\Pagination\Paginator;
@@ -25,7 +25,9 @@ class SupportEloquentORM implements SupportRepositoryInterface{
                     }
                 })
                     ->paginate($totalPerPage,['*'], 'page',  $page ) ;  //paginate vai definir a pag, primeiro quantos itens por pag vai ter, segundo quais colunas do filtro, e qual pag que é
-                return new PaginationPresenter($result);
+                
+        
+                    return new PaginationPresenter($result);
     }
 
 

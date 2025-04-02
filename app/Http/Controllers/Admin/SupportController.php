@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\DTO\CreateSupportDTO;
-use App\DTO\UpdateSupportDTO;
+use App\DTO\Supports\CreateSupportDTO;
+use App\DTO\Supports\UpdateSupportDTO;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreUpdateSupport;
 use App\Models\Support;
@@ -22,11 +22,12 @@ class SupportController extends Controller
 
         $supports =  $this->service->paginate(
             page: $request->get('page', 1),
-            totalPerPage: $request->get('per_page', 15),
+            totalPerPage: $request->get('per_page', 1),
             filter: $request->filter,
         );//aqui eu tenho um array de dados vindo da service QUE BUSCA OS DADOS
 
-        return view('admin/supports/index', compact('supports', )); //retornar a pag quando o metodo for chamado e retorna o support com os dados da tabela
+        $filters = ['filter' => $request->get('filter', '')];
+        return view('admin/supports/index', compact('supports', 'filters')); //retornar a pag quando o metodo for chamado e retorna o support com os dados da tabela
         //compac criou um array com o mesmo valor da var supports e retornou ele 
     } 
 
