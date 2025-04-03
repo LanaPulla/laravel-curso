@@ -32,13 +32,13 @@ class StoreUpdateSupport extends FormRequest
         ];
 
         //para o metodo deixar atualizar o body sem editar o assunto e o token nao dar problema criamos um IF method PUT e nao POST
-        if($this->method() === 'PUT'){ 
+        if($this->method() === 'PUT' || $this->method() === 'PATCH'){ 
             $rules['subject']=[  //as regras mudam se for PUT
                 'required',
                 'min:3',
                 'max:255',
                //"unique:supports,subject,{$this->id},id", "ele é unico na tabela supports, para coluna subject, MAS ADICIONA UMA EXCESSAO QUANDO O ID FOR IGUAL AO ID"
-               Rule::unique('supports')->ignore($this->id),
+               Rule::unique('supports')->ignore($this->support ?? $this->id),
                 
             ];
         }

@@ -14,7 +14,7 @@ class CreateSupportDTO{
 
     ){}
 
-    public static function makeFromRequest(StoreUpdateSupport $request){
+    public static function makeFromRequest(StoreUpdateSupport $request,){
         return new self(
             $request->subject,
             SupportStatus::A,
