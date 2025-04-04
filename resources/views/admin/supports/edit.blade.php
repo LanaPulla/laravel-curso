@@ -1,5 +1,16 @@
-<h1>Nova Dúvida {{ $support->id }}</h1>
 
+@extends('admin.supports.layouts.app')
+
+@section('title', 'Editar Dúvida { $support->subject }')
+
+
+@section('header')
+
+<h1 class="text-lg text-black-500">Dúvida: {{ $support->subject }}</h1>
+
+@endsection
+
+@section('content')
 <x-alert/>
 
 <form action="{{ route('supports.update', $support->id) }}" method="POST"> <!-- vai ser usado o post para armazenar isso-->
@@ -9,3 +20,4 @@
     @include('admin.supports.partials.form', ['support' => $support])
 
 </form>
+@endsection

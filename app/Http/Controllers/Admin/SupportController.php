@@ -64,7 +64,9 @@ class SupportController extends Controller
 
         $this->service->new(CreateSupportDTO::makeFromRequest($request)); //chama o metodo da DTO para criar um novo usuario
 
-        return redirect()->route('supports.index'); //depois de cadastrar retorna para pag de cadastro de novo
+        return redirect()
+                        ->route('supports.index') //depois de cadastrar retorna para pag de cadastro de nov
+                        ->with('message', 'Cadastro feito com sucesso');
     }
 
 
@@ -90,7 +92,9 @@ class SupportController extends Controller
             return back(); //... ele vai voltar para pag que o usuario tava antes 
         }
 
-        return redirect()->route('supports.index'); //acabou volta para a pag cm todos os supports
+        return redirect()
+                        ->route('supports.index') //acabou volta para a pag cm todos os supports
+                        ->with('message', 'Cadastro editado com sucesso');
     }
 
 
@@ -99,7 +103,9 @@ class SupportController extends Controller
 
         $this->service->delete($id);
 
-        return redirect()->route('supports.index');//volta para a pag indexapos excluir 
+        return redirect()
+                        ->route('supports.index')
+                        ->with('message', 'Cadastro deletado com sucesso');//volta para a pag indexapos excluir 
     }
 
 }

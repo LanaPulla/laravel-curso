@@ -1,7 +1,7 @@
-<div class="alert alert-danger">
-    @if ($errors->any()) <!-- se existir um erro-->
-            @foreach($errors->all() as $error) <!-- forearch pq tem multiplos campos q podem dar erro. joga os erros e joga para $error -->
-             {{ $error }} <!-- e depois imprime o erro na tela -->
+@if ($errors->any())
+    <div class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4 my-4" role="alert">
+        @foreach($errors->all() as $error)
+            <p>{{ $error }}</p>
         @endforeach
-    @endif
-</div>
+    </div>
+@endif
